@@ -68,8 +68,6 @@
             //注册功能模块 例如，可以添加自定义序列化器和反序列化器
             this.registerModule(simpleModule);
         }
-    
-    
 
 - 完成了mybatis-plus的分页查询；
   
@@ -85,3 +83,45 @@
 ## day03
 
 - 使用Mybatis-Plus 的TableField注解，完成公共字段自动填充，如：操作日期，操作用户等信息。
+
+## day04
+
+- 完成了文件上传和下载功能。
+  
+  - 文件路径：在配置文件中定义保存路径，用@value来注入到basePath变量中，后续动态使用。
+  
+  - 文件上传：首先获取文件名后缀，然后使用uuid重新生成文件名，防止文件名重复。
+    
+    ```java
+    //原始文件名
+            String originalFilename = file.getOriginalFilename();//abc.jpg
+            String suffix = originalFilename.substring(originalFilename.lastIndexOf("."));
+    
+            //使用UUID重新生成文件名，防止文件名称重复造成文件覆盖
+            String fileName = UUID.randomUUID().toString() + suffix;//dfsdfdfd.jpg
+    ```
+  
+  - 文件下载：
+
+- 完成了新增菜品功能：
+  
+  - 完成菜品信息分页展示功能：
+    
+    - 使用Dto类对现有的类进行扩展：如菜品dish类，扩展了所属菜品类型的名称以及其可选择的口味list。
+    
+    - ```java
+      public class DishDto extends Dish {
+      
+          private List<DishFlavor> flavors = new ArrayList<>();
+      
+          private String categoryName;
+      
+          private Integer copies;
+      }public class DishDto extends Dish {
+      ```
+  
+  - 完成根据id查询菜品信息和对应的口味信息：
+    
+    - 利用BeanUtils.copyProperties对对象进行拷贝。
+    
+    - 学会使用lambda表达式。
