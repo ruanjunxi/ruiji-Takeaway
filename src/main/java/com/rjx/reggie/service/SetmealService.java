@@ -1,7 +1,10 @@
 package com.rjx.reggie.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.rjx.reggie.dto.SetmealDto;
 import com.rjx.reggie.entity.Setmeal;
+
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -10,4 +13,17 @@ import com.rjx.reggie.entity.Setmeal;
  * @Description:
  */
 public interface SetmealService extends IService<Setmeal> {
+    /**
+     * 新增套餐，同时需要保存套餐和菜品的关联关系
+     * @param setmealDto
+     */
+    public void saveWithDish(SetmealDto setmealDto);
+
+    /**
+     * 删除套餐，同时需要删除套餐和菜品的关联数据
+     * @param ids
+     */
+    public void removeWithDish(List<Long> ids);
+
+    boolean setMealStatus(int status, List<Long> ids);
 }
